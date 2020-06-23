@@ -50,10 +50,10 @@ def do_freeze(message):
     check = "undo"
     now = "ye"
     while check == "undo":
-        sleep(20)
-        if datetime.now(pytz.timezone("Europe/Moscow")).strftime("%H%M") == message.text:
+        sleep(60)
+        if datetime.now(pytz.timezone("Europe/Moscow")).strftime("%H") == message.text:
             bot.set_chat_permissions(chat_for, new_permissions)
-            now = int(datetime.now(pytz.timezone("Europe/Moscow")).strftime("%H%M"))
+            now = int(datetime.now(pytz.timezone("Europe/Moscow")).strftime("%H"))
             bot.send_message(message.chat.id, """Установлен час тишины✅
 Для всех участников чата активирована режим чтения⏳""")
             bot.send_message(chat_for, """Установлен час тишины✅
@@ -62,7 +62,7 @@ def do_freeze(message):
             print(now)
 
     while check == "do":
-        if int(datetime.now(pytz.timezone("Europe/Moscow")).strftime("%H%M")) == int(now) + int(interval):
+        if int(datetime.now(pytz.timezone("Europe/Moscow")).strftime("%H")) == int(now) + int(interval):
             bot.set_chat_permissions(chat_for, allowed_permissions)
             bot.send_message(message.chat.id, """Ограничения сняты✅
 Участники могут отправлять сообщения!🥳""")
