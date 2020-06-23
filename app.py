@@ -7,7 +7,7 @@ import pytz
 from time import sleep
 
 bot = telebot.TeleBot("1206195696:AAGMrhQEMMnzyjP5VukNUBS2WgwlE8-jFBw")
-chat_for = "-1001477648063"
+chat_for = "-1001475972248"
 
 my_permissions = {
     "can_send_messages": False,
