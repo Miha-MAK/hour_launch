@@ -70,7 +70,7 @@ def do_freeze(message):
 Участники могут отправлять сообщения!🥳""")
             print("uspex1")
             check = "ando"
-
+        sleep(500)
 
 
 @bot.callback_query_handler(func=lambda call: True)
