@@ -50,6 +50,7 @@ def do_freeze(message):
     check = "undo"
     now = "ye"
     bot.send_message(message.chat.id, """Таймер поставлен✅""")
+    print(message.text)
     while check == "undo":
         sleep(60)
         if datetime.now(pytz.timezone("Europe/Moscow")).strftime("%H") == message.text:
