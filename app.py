@@ -5,10 +5,11 @@ from telebot import types
 from telebot.apihelper import _make_request
 import pytz
 from time import sleep
-
-bot = telebot.TeleBot("1206195696:AAGMrhQEMMnzyjP5VukNUBS2WgwlE8-jFBw")
-chat_for = "-1001475972248"
-
+# "1206195696:AAGMrhQEMMnzyjP5VukNUBS2WgwlE8-jFBw"
+# -1001475972248
+bot = telebot.TeleBot("1183711162:AAHPWgHgpUWGF1PZ-fXSZny6U6AI2ow0blQ")
+chat_for = "-1001477648063"
+admin_id = 491657362
 my_permissions = {
     "can_send_messages": False,
     "can_send_media_messages": False,
@@ -49,19 +50,25 @@ def any_msg(message):
 def do_freeze(message):
     check = "undo"
     now = "ye"
-    bot.send_message(message.chat.id, """Таймер поставлен✅""")
-    print(message.text)
-    while check == "undo":
-        sleep(60)
-        if datetime.now(pytz.timezone("Europe/Moscow")).strftime("%H") == message.text:
-            bot.set_chat_permissions(chat_for, new_permissions)
-            now = int(datetime.now(pytz.timezone("Europe/Moscow")).strftime("%H"))
-            bot.send_message(message.chat.id, """Установлен час тишины✅
-Для всех участников чата активирована режим чтения⏳""")
-            bot.send_message(chat_for, """Установлен час тишины✅
-Для всех участников чата активирована режим чтения⏳""")
-            check = "do"
-            print(now)
+    if message.from_user.id == admin_id and message.text.isdigit() and int(message.text) >= 10 and int(message.text) <= 23:
+        print(message.text)
+
+        bot.send_message(message.chat.id, """Таймер поставлен✅""")
+        while check == "undo":
+            sleep(60)
+            if datetime.now(pytz.timezone("Europe/Moscow")).strftime("%H") == message.text:
+                bot.set_chat_permissions(chat_for, new_permissions)
+                now = int(datetime.now(pytz.timezone("Europe/Moscow")).strftime("%H"))
+                bot.send_message(message.chat.id, """Установлен час тишины✅
+    Для всех участников чата активирована режим чтения⏳""")
+                bot.send_message(chat_for, """Установлен час тишины✅
+    Для всех участников чата активирована режим чтения⏳""")
+                check = "do"
+                print(now)
+    elif message.from_user.id != admin_id:
+        bot.send_message(message.chat.id, """У вас нет прав поставить таймер🚫""")
+    else:
+        bot.send_message(message.chat.id, """Неправильное время🚫""")
 
     while check == "do":
         if int(datetime.now(pytz.timezone("Europe/Moscow")).strftime("%H")) == int(now) + int(interval):
@@ -72,7 +79,7 @@ def do_freeze(message):
 Участники могут отправлять сообщения!🥳""")
             print("uspex1")
             check = "ando"
-        sleep(400)
+
 
 
 @bot.callback_query_handler(func=lambda call: True)
