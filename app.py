@@ -7,9 +7,9 @@ import pytz
 from time import sleep
 # "1206195696:AAGMrhQEMMnzyjP5VukNUBS2WgwlE8-jFBw"
 # -1001475972248
-bot = telebot.TeleBot("1206195696:AAGMrhQEMMnzyjP5VukNUBS2WgwlE8-jFBw")
-chat_for = "-1001475972248"
-admin_id = 327659575
+bot = telebot.TeleBot("1183711162:AAHPWgHgpUWGF1PZ-fXSZny6U6AI2ow0blQ")
+chat_for = "-1001477648063"
+admin_id = 491657362
 my_permissions = {
     "can_send_messages": False,
     "can_send_media_messages": False,
@@ -51,6 +51,7 @@ def do_freeze(message):
     check = "undo"
     now = "ye"
     if message.from_user.id == admin_id and message.text.isdigit() and int(message.text) >= 10 and int(message.text) <= 23:
+
         print(message.text)
 
         bot.send_message(message.chat.id, """Таймер поставлен✅""")
@@ -65,9 +66,9 @@ def do_freeze(message):
     Для всех участников чата активирована режим чтения⏳""")
                 check = "do"
                 print(now)
-    elif message.from_user.id != admin_id:
+    elif message.from_user.id != admin_id and message.text.isdecimal():
         bot.send_message(message.chat.id, """У вас нет прав поставить таймер🚫""")
-    else:
+    elif message.from_user.id == admin_id and message.text.isdigit() and int(message.text) >= 1 and int(message.text) <= 9:
         bot.send_message(message.chat.id, """Неправильное время🚫""")
 
     while check == "do":
