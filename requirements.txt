@@ -27,7 +27,7 @@ py==1.8.1
 pyaes==1.6.1
 pyasn1==0.4.8
 pycparser==2.20
-PyJWT==1.7.1
+PyJWT==2.4.0
 pymessenger==0.0.7.0
 pyparsing==2.4.6
 PySocks==1.7.1
